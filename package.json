@@ -1,0 +1,46 @@
+{
+  "name": "nextjs-chrome-extension",
+  "private": true,
+  "scripts": {
+    "dev": "npm-watch",
+	"browser": "next dev",
+    "build": "next build && next export && npm run lint:build",
+    "lint:build": "ren out\\_next assets && python rename.py",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "next": "12.1.6",
+    "react": "18.1.0",
+    "react-dom": "18.1.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.15",
+    "eslint": "8.16.0",
+    "eslint-config-next": "12.1.6",
+    "npm-watch": "^0.11.0",
+    "postcss": "^8.4.28",
+    "tailwindcss": "^3.3.3"
+  },
+  "watch": {
+    "build": {
+      "patterns": [
+        ".",
+        "styles/**",
+        "pages/**",
+        "public/**"
+      ],
+      "ignore": [
+        "out",
+        "node_modules",
+        ".next"
+      ],
+      "extensions": [
+        "js",
+        "json",
+        "lock",
+        "tsx",
+        "ts"
+      ]
+    }
+  }
+}
