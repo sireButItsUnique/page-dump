@@ -13,8 +13,9 @@ module.exports = {
 			colors: {
 				"blue-base": "#306489",
 				"blue-highlight": "#2e7b94",
-				"dark-pitch": "#172026",
-				"dark-base": "#202c34",
+				"dark-pitch": "#101519",
+				"dark-base": "#172026",
+				"dark-contrast": "#202c34",
 			},
 		},
 	},
