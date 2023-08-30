@@ -18,3 +18,23 @@
 	color:rgba(0, 0, 0, 0);
 	background-color: rgba(28, 40, 48, 0.5);
 }
+
+.box:hover {
+	--border-size: 2px;
+	--border-angle: 0turn;
+	background-image: conic-gradient(from var(--border-angle), #202c34, #202c34, #202c34), conic-gradient(from var(--border-angle), transparent 20%, #306489, #ffffff);
+	background-size: calc(100% - (var(--border-size) * 2)) calc(100% - (var(--border-size) * 2)), cover;
+	background-position: center center;
+	background-repeat: no-repeat;
+	animation: bg-spin 3s linear infinite;
+}
+@keyframes bg-spin {
+	to {
+		--border-angle: 1turn;
+	}
+}
+@property --border-angle {
+	syntax: "<angle>";
+	inherits: true;
+	initial-value: 0turn;
+}
