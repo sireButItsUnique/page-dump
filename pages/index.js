@@ -1,10 +1,10 @@
 /*global chrome*/
 "use client";
 import Dumpster from "./../components/dumpster/Dumpster";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function Home() {
-	chrome.extension.getBackgroundPage().console.log("mounted");
+	const [txt, setTxt] = useState("Test");
 
 	return (
 		<div className="px-[2rem] py-[1rem] bg-dark-pitch">
@@ -14,6 +14,15 @@ export default function Home() {
 					pageDump
 				</h1>
 			</div>
+			<button
+				className="bg-white"
+				onClick={() => {
+					chrome.extension.getBackgroundPage().console.log("mounted");
+					alert("mounted");
+					setTxt("clicked");
+				}}>
+				{txt}
+			</button>
 			<Dumpster />
 		</div>
 	);
