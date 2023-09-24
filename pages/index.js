@@ -1,7 +1,11 @@
+/*global chrome*/
 "use client";
 import Dumpster from "./../components/dumpster/Dumpster";
+import { useEffect } from "react";
 
 export default function Home() {
+	chrome.extension.getBackgroundPage().console.log("mounted");
+
 	return (
 		<div className="px-[2rem] py-[1rem] bg-dark-pitch">
 			<div className="justify-center flex items-center mb-[0.5rem] overflow-x-hidden">

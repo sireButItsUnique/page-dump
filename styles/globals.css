@@ -26,7 +26,7 @@
 	background-size: calc(100% - (var(--border-size) * 2)) calc(100% - (var(--border-size) * 2)), cover;
 	background-position: center center;
 	background-repeat: no-repeat;
-	animation: bg-spin 3s linear infinite;
+	animation: bg-spin 5s linear infinite;
 }
 @keyframes bg-spin {
 	to {
