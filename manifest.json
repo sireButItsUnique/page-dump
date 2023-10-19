@@ -23,8 +23,16 @@
 		}
 	],
 
+	"commands": {
+		"save" : {
+			"suggested_key": {
+				"default": "Ctrl+Shift+S" 
+			},
+			"description": "Save a link"
+		}
+	},
 	"host_permissions": ["<all_urls>"],
 	"permissions": [
-		"pageCapture", "bookmarks"
+		"activeTab", "tabs"
 	]
   }
