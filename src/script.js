@@ -1,9 +1,10 @@
-chrome.runtime.onMessage.addListener((req, sender, res) => {
-	// adding thing on background dom
-	const { url } = req;
+//Your background page can increment the value and store it via chrome.storage.local.set
+//Your popup.js (a different script) can use chrome.storage.local.get on startup and chrome.storage.onChanged to detect the changes
+
+function add(data) {
 	let div = document.createElement("div");
 	let label = document.createElement("h1");
-	label.textContent = "bookmarking " + url;
+	label.textContent = "bookmarking " + data;
 	div.style.zIndex = 999;
 	div.style.position = "fixed";
 	div.style.top = "50%";
@@ -21,8 +22,16 @@ chrome.runtime.onMessage.addListener((req, sender, res) => {
 		"Inter var,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji";
 	div.appendChild(label);
 	document.body.appendChild(div);
+}
 
-	// api
-	chrome.storage.local.set({ saved: url });
-	res({ result: "success" });
+chrome.storage.local.get(["saved"]).then((res) => {
+	add(res.saved);
+});
+
+chrome.storage.onChanged.addListener((changes, namespace) => {
+	if (namespace == "local" && changes.saved?.newValue) {
+		chrome.storage.local.get(["saved"]).then((res) => {
+			add(res.saved);
+		});
+	}
 });

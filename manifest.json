@@ -33,6 +33,6 @@
 	},
 	"host_permissions": ["<all_urls>"],
 	"permissions": [
-		"activeTab", "tabs"
+		"activeTab", "tabs", "storage", "unlimitedStorage"
 	]
   }
