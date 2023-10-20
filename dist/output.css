@@ -534,6 +534,18 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
+.static {
+  position: static;
+}
+
+.fixed {
+  position: fixed;
+}
+
+.absolute {
+  position: absolute;
+}
+
 .mb-\[0\.5rem\] {
   margin-bottom: 0.5rem;
 }
@@ -556,6 +568,10 @@ video {
 
 .max-w-\[16rem\] {
   max-width: 16rem;
+}
+
+.transform {
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
 .flex-wrap {
@@ -628,7 +644,7 @@ video {
   font-weight: 700;
 }
 
-.text-blue-base {
+.text-blue-highlight {
   --tw-text-opacity: 1;
   color: rgb(83 221 242 / var(--tw-text-opacity));
 }
@@ -650,7 +666,7 @@ video {
   background-color: rgba(28, 40, 48, 0.5);
 }
 
-@keyframes slideLeft {
+@keyframes nameSlide {
   0% {
     transform: translateX(140%);
   }
@@ -668,7 +684,7 @@ video {
   }
 }
 
-@keyframes slideBack {
+@keyframes nameSlideBack {
   0% {
     transform: translateX(10%);
   }
@@ -678,7 +694,7 @@ video {
   }
 }
 
-@keyframes slideRight {
+@keyframes logoSlide {
   0% {
     transform: translateX(-100%);
   }
@@ -688,11 +704,16 @@ video {
   }
 }
 
-.slideLeft {
-  animation: 2.8s ease-out 0s 1 slideLeft, 1.24s ease-out 2.7s 1 slideBack;
+.nameSlide {
+  animation: 2.8s ease-out 0s 1 nameSlide, 1.24s ease-out 2.7s 1 nameSlideBack;
 }
 
-.slideRight {
-  animation: 1s ease-out 0s 1 slideRight;
+.logoSlide {
+  animation: 1s ease-out 0s 1 logoSlide;
 }
 
+.text-gradient {
+  background: -webkit-linear-gradient(#53ddf2, #2e7b94);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

@@ -19,7 +19,7 @@
 	background-color: rgba(28, 40, 48, 0.5);
 }
 
-@keyframes slideLeft {
+@keyframes nameSlide {
 	0% {
 	  	transform: translateX(140%);
 	}
@@ -35,7 +35,7 @@
 	}
 }
 
-@keyframes slideBack {
+@keyframes nameSlideBack {
 	0% {
 		transform: translateX(10%);
 	}
@@ -44,7 +44,7 @@
 	}
 }
 
-@keyframes slideRight {
+@keyframes logoSlide {
 	0% {
 	  	transform: translateX(-100%);
 	}
@@ -53,11 +53,16 @@
 	}
 }
 
-.slideLeft {
-	animation: 2.8s ease-out 0s 1 slideLeft, 1.24s ease-out 2.7s 1 slideBack;
+.nameSlide {
+	animation: 2.8s ease-out 0s 1 nameSlide, 1.24s ease-out 2.7s 1 nameSlideBack;
 }
 
-.slideRight {
-	animation: 1s ease-out 0s 1 slideRight;
+.logoSlide {
+	animation: 1s ease-out 0s 1 logoSlide;
 }
 
+.text-gradient {
+	background: -webkit-linear-gradient(#53ddf2, #2e7b94);
+  	-webkit-background-clip: text;
+  	-webkit-text-fill-color: transparent;
+}

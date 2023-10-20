@@ -8,7 +8,11 @@ chrome.commands.onCommand.addListener(async (command) => {
 	if (command === "save") {
 		let tab = await getCurrentTab();
 		console.log("saved " + tab.url);
-	} else if (command === "random") {
-		console.log("random");
+
+		chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+			chrome.tabs.sendMessage(tab.id, { url: tab.url }, (res) => {
+				console.log(res);
+			});
+		});
 	}
 });
