@@ -24,5 +24,9 @@ chrome.runtime.onMessage.addListener((req, sender, res) => {
 
 	// api
 	chrome.storage.local.set({ saved: url });
+	chrome.storage.local.get(["cnt"]).then((res) => {
+		chrome.storage.local.set({ cnt: res.cnt + 1 });
+	});
+
 	res({ result: "success" });
 });

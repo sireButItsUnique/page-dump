@@ -1,6 +1,3 @@
-//Your background page can increment the value and store it via chrome.storage.local.set
-//Your popup.js (a different script) can use chrome.storage.local.get on startup and chrome.storage.onChanged to detect the changes
-
 function add(data) {
 	let div = document.createElement("div");
 	let label = document.createElement("h1");
@@ -25,13 +22,13 @@ function add(data) {
 }
 
 chrome.storage.local.get(["saved"]).then((res) => {
-	add(res.saved);
+	//add(res.saved);
 });
 
 chrome.storage.onChanged.addListener((changes, namespace) => {
 	if (namespace == "local" && changes.saved?.newValue) {
 		chrome.storage.local.get(["saved"]).then((res) => {
-			add(res.saved);
+			//add(res.saved);
 		});
 	}
 });
