@@ -1,7 +1,35 @@
 class Folder {
 	state = {
 		menuOpen: false,
+		mouseOver: false,
 	};
+
+	openMenu() {
+		this.menu = document.createElement("div");
+		this.menu.className =
+			"bg-dark-contrast border-slate-400 border rounded left-[40%] top-[80%] px-[0.1rem] py-[0.25rem] absolute z-[10]";
+
+		let trash = document.createElement("button");
+		trash.innerText = "Delete";
+		trash.className =
+			"text-red-400 hover:bg-dark-pitch rounded-sm px-[0.4rem]";
+
+		let rename = document.createElement("button");
+		rename.innerText = "Rename";
+		rename.className =
+			"text-slate-500 hover:bg-dark-pitch rounded-sm px-[0.4rem]";
+
+		this.menu.appendChild(rename);
+		this.menu.appendChild(trash);
+		this.folder.appendChild(this.menu);
+		this.state.menuOpen = true;
+	}
+
+	closeMenu() {
+		this.folder.removeChild(this.menu);
+		this.state.menuOpen = false;
+	}
+
 	constructor(parentId) {
 		// create folder
 		this.wrapper = document.createElement("div");
@@ -18,35 +46,23 @@ class Folder {
 		this.label.className = "mt-[0.25rem] text-blue-base text-center";
 		this.label.innerText = "Folder";
 
-		// add functionality
+		// add listeners
 		document.addEventListener("click", (e) => {
 			if (this.state.menuOpen) {
-				this.folder.removeChild(this.menu);
-				this.state.menuOpen = false;
+				this.closeMenu();
 			}
 		});
 		this.folder.addEventListener("contextmenu", (e) => {
 			e.preventDefault();
 			if (!this.state.menuOpen) {
-				this.state.menuOpen = true;
-				this.menu = document.createElement("div");
-				this.menu.className =
-					"bg-dark-contrast border-slate-400 border rounded left-[40%] top-[80%] px-[0.1rem] py-[0.25rem] absolute z-[10]";
-
-				let trash = document.createElement("button");
-				trash.innerText = "Delete";
-				trash.className =
-					"text-red-400 hover:bg-dark-pitch rounded-sm px-[0.4rem]";
-
-				let rename = document.createElement("button");
-				rename.innerText = "Rename";
-				rename.className =
-					"text-slate-500 hover:bg-dark-pitch rounded-sm px-[0.4rem]";
-
-				this.menu.appendChild(rename);
-				this.menu.appendChild(trash);
-				this.folder.appendChild(this.menu);
+				this.openMenu();
 			}
+		});
+		this.folder.addEventListener("mouseover", (e) => {
+			this.state.mouseOver = true;
+		});
+		this.folder.addEventListener("mouseleave", (e) => {
+			this.state.mouseOver = false;
 		});
 
 		// inject into dom
