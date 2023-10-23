@@ -1,47 +1,59 @@
 class Folder {
+	state = {
+		menuOpen: false,
+	};
 	constructor(parentId) {
 		// create folder
-		let div = document.createElement("div");
-		div.className = "m-[0.5rem] flex flex-col justify-center";
+		this.wrapper = document.createElement("div");
+		this.wrapper.className = "m-[0.5rem] flex flex-col justify-center";
 
-		let folder = document.createElement("button");
-		folder.className =
+		this.folder = document.createElement("button");
+		this.folder.className =
 			"min-h-[4.5rem] max-h-[4.5rem] min-w-[4.5rem] max-w-[4.5rem] p-[0.5rem] bg-dark-contrast box rounded grid relative";
 
-		let img = document.createElement("img");
-		img.src = "./../public/images/folder.png";
+		this.img = document.createElement("img");
+		this.img.src = "./../public/images/folder.png";
 
-		let label = document.createElement("h1");
-		label.className = "mt-[0.25rem] text-blue-base text-center";
-		label.innerText = "Folder";
+		this.label = document.createElement("h1");
+		this.label.className = "mt-[0.25rem] text-blue-base text-center";
+		this.label.innerText = "Folder";
 
 		// add functionality
-		folder.addEventListener("contextmenu", (e) => {
+		document.addEventListener("click", (e) => {
+			if (this.state.menuOpen) {
+				this.folder.removeChild(this.menu);
+				this.state.menuOpen = false;
+			}
+		});
+		this.folder.addEventListener("contextmenu", (e) => {
 			e.preventDefault();
-			let menu = document.createElement("div");
-			menu.className =
-				"bg-dark-contrast border-slate-400 border rounded left-[40%] top-[80%] px-[0.1rem] py-[0.25rem] absolute z-[10]";
+			if (!this.state.menuOpen) {
+				this.state.menuOpen = true;
+				this.menu = document.createElement("div");
+				this.menu.className =
+					"bg-dark-contrast border-slate-400 border rounded left-[40%] top-[80%] px-[0.1rem] py-[0.25rem] absolute z-[10]";
 
-			let trash = document.createElement("button");
-			trash.innerText = "Delete";
-			trash.className =
-				"text-red-400 hover:bg-dark-pitch rounded-sm px-[0.4rem]";
+				let trash = document.createElement("button");
+				trash.innerText = "Delete";
+				trash.className =
+					"text-red-400 hover:bg-dark-pitch rounded-sm px-[0.4rem]";
 
-			let rename = document.createElement("button");
-			rename.innerText = "Rename";
-			rename.className =
-				"text-slate-500 hover:bg-dark-pitch rounded-sm px-[0.4rem]";
+				let rename = document.createElement("button");
+				rename.innerText = "Rename";
+				rename.className =
+					"text-slate-500 hover:bg-dark-pitch rounded-sm px-[0.4rem]";
 
-			menu.appendChild(rename);
-			menu.appendChild(trash);
-			folder.appendChild(menu);
+				this.menu.appendChild(rename);
+				this.menu.appendChild(trash);
+				this.folder.appendChild(this.menu);
+			}
 		});
 
 		// inject into dom
-		folder.appendChild(img);
-		div.appendChild(folder);
-		div.appendChild(label);
-		document.getElementById(parentId).appendChild(div);
+		this.folder.appendChild(this.img);
+		this.wrapper.appendChild(this.folder);
+		this.wrapper.appendChild(this.label);
+		document.getElementById(parentId).appendChild(this.wrapper);
 	}
 }
 
