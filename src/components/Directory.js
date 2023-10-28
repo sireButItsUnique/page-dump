@@ -15,6 +15,15 @@ class Directory {
 		let newPage = new Page(name, pageHash);
 		this.wrapper.appendChild(newPage.wrapper);
 		this.state.content.push(newPage);
+
+		newPage.wrapper.addEventListener("closeAllMenus", () => {
+			for (let i = 0; i < this.state.content.length; i++) {
+				let page = this.state.content[i];
+				if (page.state.hash != pageHash) {
+					page.closeMenu();
+				}
+			}
+		});
 	}
 
 	constructor(hash) {

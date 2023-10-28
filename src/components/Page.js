@@ -40,6 +40,13 @@ class Page {
 			if (!this.state.menuOpen) {
 				this.openMenu();
 			}
+			const closeAllMenus = new Event("closeAllMenus");
+			this.wrapper.dispatchEvent(closeAllMenus);
+		});
+
+		// opening saved page
+		this.folder.addEventListener("click", (e) => {
+			chrome.tabs.create({ url: this.state.url });
 		});
 	}
 
@@ -47,6 +54,9 @@ class Page {
 		// setting up state
 		this.state.name = name;
 		this.state.hash = hash;
+		chrome.storage.local.get(["storage"], ({ storage }) => {
+			this.state.url = storage[hash];
+		});
 
 		// setting up dom content
 		this.wrapper.className = "m-[0.5rem] flex flex-col justify-center";
