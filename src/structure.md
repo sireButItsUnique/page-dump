@@ -2,20 +2,22 @@
 
 ## storage
 
-    [pageHash]
+    [pageHash]: html
 
-## folders
+## directory
 
     root
-    	[subfolders]
+    	sub
     		[subfolders]
-    		content
-    			[pages]
-    				[pageHash]
-    				[icon]
-    				[name]
+    			sub
+    				[subfolders]
+    			content
+    				[pages]
+    					pageHash: hash
+    					icon: img
+    					name: string
     	content
     		[pages]
-    			[pageHash]
-    			[icon]
-    			[name]
+    			pageHash: hash
+    			icon: img
+    			name: string

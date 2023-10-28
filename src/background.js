@@ -8,15 +8,34 @@ chrome.commands.onCommand.addListener(async (command) => {
 	if (command === "save") {
 		let tab = await getCurrentTab();
 		console.log("saved " + tab.url);
-
-		chrome.storage.local.set({ saved: tab.url });
-		chrome.storage.local.get(["cnt"]).then((res) => {
-			chrome.storage.local.set({ cnt: res.cnt + 1 });
-		});
 	}
 });
 
 chrome.runtime.onInstalled.addListener(() => {
 	console.log("detected startup");
-	chrome.storage.local.set({ cnt: 1 });
+	chrome.storage.local.set({
+		storage: {
+			aaaaa: "https://stackoverflow.com/questions/16503879/chrome-extension-how-to-open-a-link-in-new-tab",
+			hiyaaaaa:
+				"https://stackoverflow.com/questions/16503879/chrome-extension-how-to-open-a-link-in-new-tab",
+		},
+	});
+	chrome.storage.local.set({
+		directory: {
+			root: {
+				content: {
+					page1: {
+						pageHash: "aaaaa",
+						name: "page1",
+					},
+					page2: {
+						pageHash: "hiyaaaaa",
+						name: "page2",
+					},
+				},
+				sub: {},
+			},
+		},
+	});
+	chrome.storage.local.get(console.log);
 });

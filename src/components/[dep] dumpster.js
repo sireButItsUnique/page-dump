@@ -1,4 +1,4 @@
-import Folder from "./folder.js";
+import Folder from "./[dep] folder.js";
 
 class Dumpster {
 	state = {
