@@ -4,6 +4,43 @@ class Dumpster {
 	state = {
 		folders: [],
 	};
+
+	addListeners() {
+		// update folder count
+		chrome.storage.onChanged.addListener(async (changes, namespace) => {
+			if (namespace == "local" && changes.cnt?.newValue > -10) {
+				let { cnt } = await chrome.storage.local.get(["cnt"]);
+				console.log("cnt update recieved");
+				while (this.state.folders.length > 0) {
+					this.wrapper.removeChild(this.wrapper.firstChild);
+					this.state.folders.length--;
+				}
+				while (cnt > 0) {
+					this.state.folders.push(new Folder("dumpster"));
+					cnt--;
+				}
+			}
+		});
+
+		// close all folders besides one being opened
+		document.addEventListener("contextmenu", (e) => {
+			for (let i = 0; i < this.state.folders.length; i++) {
+				if (!this.state.folders[i].state.mouseOver) {
+					this.state.folders[i].closeMenu();
+				}
+			}
+		});
+	}
+
+	async init() {
+		// gather how many folders to display
+		let { cnt } = await chrome.storage.local.get(["cnt"]);
+		while (cnt > 0) {
+			this.state.folders.push(new Folder("dumpster"));
+			cnt--;
+		}
+	}
+
 	constructor() {
 		// create dumpster
 		this.wrapper = document.createElement("div");
@@ -13,30 +50,8 @@ class Dumpster {
 
 		// inject into dom
 		document.getElementById("wrapper").appendChild(this.wrapper);
-
-		// set up listeners
-		this.state.folders.push(new Folder("dumpster"));
-		chrome.storage.local.get(["cnt"]).then((res) => {
-			while (res.cnt--) {
-				this.state.folders.push(new Folder("dumpster"));
-			}
-		});
-
-		chrome.storage.onChanged.addListener((changes, namespace) => {
-			if (namespace == "local" && changes.cnt?.newValue) {
-				chrome.storage.local.get(["cnt"]).then((res) => {
-					this.state.folders.push(new Folder("dumpster"));
-				});
-			}
-		});
-
-		document.addEventListener("contextmenu", (e) => {
-			for (let i = 0; i < this.state.folders.length; i++) {
-				if (!this.state.folders[i].state.mouseOver) {
-					this.state.folders[i].closeMenu();
-				}
-			}
-		});
+		this.addListeners();
+		this.init();
 	}
 }
 

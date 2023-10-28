@@ -1,4 +1,3 @@
-chrome.storage.local.set({ cnt: 0 });
 async function getCurrentTab() {
 	let queryOptions = { active: true, lastFocusedWindow: true };
 	let [tab] = await chrome.tabs.query(queryOptions);
@@ -11,9 +10,12 @@ chrome.commands.onCommand.addListener(async (command) => {
 		console.log("saved " + tab.url);
 
 		chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-			chrome.tabs.sendMessage(tab.id, { url: tab.url }, (res) => {
-				console.log(res);
-			});
+			chrome.tabs.sendMessage(tab.id, { url: tab.url }, (res) => {});
 		});
 	}
+});
+
+chrome.runtime.onInstalled.addListener(() => {
+	console.log("detected startup");
+	chrome.storage.local.set({ cnt: 1 });
 });

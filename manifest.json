@@ -33,6 +33,6 @@
 	},
 	"host_permissions": ["<all_urls>"],
 	"permissions": [
-		"activeTab", "tabs", "storage", "unlimitedStorage"
+		"activeTab", "tabs", "storage", "unlimitedStorage", "nativeMessaging"
 	]
   }
