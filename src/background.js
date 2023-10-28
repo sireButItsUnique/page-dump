@@ -9,8 +9,9 @@ chrome.commands.onCommand.addListener(async (command) => {
 		let tab = await getCurrentTab();
 		console.log("saved " + tab.url);
 
-		chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-			chrome.tabs.sendMessage(tab.id, { url: tab.url }, (res) => {});
+		chrome.storage.local.set({ saved: tab.url });
+		chrome.storage.local.get(["cnt"]).then((res) => {
+			chrome.storage.local.set({ cnt: res.cnt + 1 });
 		});
 	}
 });

@@ -2,6 +2,7 @@ class Folder {
 	state = {
 		menuOpen: false,
 		mouseOver: false,
+		url: "https://stackoverflow.com/questions/16503879/chrome-extension-how-to-open-a-link-in-new-tab",
 	};
 
 	addListeners() {
@@ -16,6 +17,9 @@ class Folder {
 			if (!this.state.menuOpen) {
 				this.openMenu();
 			}
+		});
+		this.folder.addEventListener("click", (e) => {
+			chrome.tabs.create({ url: this.state.url });
 		});
 
 		// relaying mouse state
