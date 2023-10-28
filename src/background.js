@@ -20,19 +20,18 @@ chrome.runtime.onInstalled.addListener(() => {
 				"https://stackoverflow.com/questions/16503879/chrome-extension-how-to-open-a-link-in-new-tab",
 		},
 	});
+
+	let content = {};
+	for (let i = 0; i < 20; i++) {
+		content["page" + i] = {
+			pageHash: "aaaa" + i,
+			name: "page" + i,
+		};
+	}
 	chrome.storage.local.set({
 		directory: {
 			root: {
-				content: {
-					page1: {
-						pageHash: "aaaaa",
-						name: "page1",
-					},
-					page2: {
-						pageHash: "hiyaaaaa",
-						name: "page2",
-					},
-				},
+				content: content,
 				sub: {},
 			},
 		},
