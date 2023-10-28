@@ -12,7 +12,7 @@ class Directory {
 	}
 
 	addPage({ name, pageHash }) {
-		let newPage = new Page(name, pageHash);
+		let newPage = new Page(name, pageHash, this.state.content.length);
 		this.wrapper.appendChild(newPage.wrapper);
 		this.state.content.push(newPage);
 
@@ -31,7 +31,7 @@ class Directory {
 
 		this.wrapper.className =
 			"bg-dark-base rounded py-[2rem] pl-[2rem] pr-[1.1rem] overflow-y-scroll min-w-[16rem] max-w-[16rem] min-h-[24rem] max-h-[24rem] flex flex-wrap justify-start content-start";
-		this.wrapper.id = "hash";
+		this.wrapper.id = hash;
 	}
 }
 

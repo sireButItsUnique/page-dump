@@ -50,7 +50,7 @@ class Page {
 		});
 	}
 
-	constructor(name, hash) {
+	constructor(name, hash, delay) {
 		// setting up state
 		this.state.name = name;
 		this.state.hash = hash;
@@ -59,16 +59,17 @@ class Page {
 		});
 
 		// setting up dom content
-		this.wrapper.className = "m-[0.5rem] flex flex-col justify-center";
+		this.wrapper.className = `m-[0.5rem] flex flex-col justify-center animate-fade z-0 anidelay-${delay} opacity-0`;
 		this.wrapper.id = hash;
 		this.folder.className =
 			"min-h-[4.5rem] max-h-[4.5rem] min-w-[4.5rem] max-w-[4.5rem] p-[0.5rem] bg-dark-contrast box rounded grid relative";
 		this.img.src = "./../public/images/folder.png";
-		this.label.className = "mt-[0.25rem] text-blue-base text-center";
+		this.label.className =
+			"mt-[0.25rem] text-blue-base text-center relative";
 		this.label.innerText = name;
 
 		this.menu.className =
-			"bg-dark-contrast border-slate-400 border rounded left-[40%] top-[80%] px-[0.1rem] py-[0.25rem] absolute z-[10]";
+			"bg-dark-contrast border-slate-400 border rounded left-[40%] top-[80%] px-[0.1rem] py-[0.25rem] animate-dropdown absolute z-[10]";
 		this.trash.innerText = "Delete";
 		this.trash.className =
 			"text-red-400 hover:bg-dark-pitch rounded-sm px-[0.4rem]";

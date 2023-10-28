@@ -86,3 +86,44 @@
 	inherits: true;
 	initial-value: 0turn;
 }
+
+.animate-fade {
+	animation-duration: 0.5s;
+	animation-name: animate-fade;
+	animation-timing-function: cubic-bezier(.26, .53, .74, 1.48);
+	animation-fill-mode: forwards;
+}
+  
+@keyframes animate-fade {
+	0% {
+		opacity: 0;
+		transform: scale(0.5, 0.5);
+	}
+	
+	100% {
+		opacity: 1;
+		transform: scale(1, 1);
+	}
+}
+
+.animate-dropdown {
+	animation-duration: 0.5s;
+	animation-name: animate-dropdown;
+	animation-fill-mode: forwards;
+}
+
+@keyframes animate-dropdown {
+	0% {
+		opacity: 0;
+		transform: translateY(-100%)
+	}
+	
+	50% {
+		opacity: 0.2;
+	}
+	
+	100% {
+		opacity: 1;
+		transform: translateY(0%);
+	}
+}
