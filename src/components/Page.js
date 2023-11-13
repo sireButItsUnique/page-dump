@@ -56,7 +56,11 @@ class Page {
 		});
 	}
 
-	constructor(name, hash, delay) {
+	setFadeDelay(delay) {
+		this.wrapper.className = `m-[0.5rem] flex flex-col justify-center animate-fade z-0 anidelay-${delay} opacity-0`;
+	}
+
+	constructor(name, hash) {
 		// setting up state
 		this.state.name = name;
 		this.state.hash = hash;
@@ -65,7 +69,7 @@ class Page {
 		});
 
 		// setting up dom content
-		this.wrapper.className = `m-[0.5rem] flex flex-col justify-center animate-fade z-0 anidelay-${delay} opacity-0`;
+		this.wrapper.className = `m-[0.5rem] flex flex-col justify-center animate-fade z-0 anidelay-0 opacity-0`;
 		this.wrapper.id = hash;
 		this.folder.className =
 			"min-h-[4.5rem] max-h-[4.5rem] min-w-[4.5rem] max-w-[4.5rem] p-[0.5rem] bg-dark-contrast box rounded grid relative";

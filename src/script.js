@@ -1,13 +1,26 @@
 import Directory from "./components/Directory.js";
+
+// format is [hash]: corresponding directory
 let heirarchy = {
-	// [hash]: corresponding directory
-	root: new Directory("root"),
+	"#root": new Directory("root", "#root"),
 };
 
-chrome.storage.local.get(["directory"], ({ directory }) => {
-	for (const key in directory.root.content) {
-		heirarchy.root.addPage(directory.root.content[key]);
+// recursively adds children of current directory
+function rec(dir) {
+	// adds content pages
+	for (const key in dir.content) {
+		heirarchy[dir.dirHash].addPage(dir.content[key]);
 	}
-});
 
-heirarchy.root.display();
+	// adds sub dirs
+	for (const key in dir.sub) {
+		heirarchy[dir.dirHash].addSubdir(dir.sub[key]);
+		heirarchy[key] = new Directory(dir.sub[key].name, key);
+		rec(dir.sub[key]);
+	}
+}
+
+chrome.storage.local.get(["directory"], ({ directory }) => {
+	rec(directory["#root"]);
+	heirarchy["#root"].display();
+});
