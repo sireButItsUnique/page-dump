@@ -4,6 +4,7 @@ import Directory from "./components/Directory.js";
 let heirarchy = {
 	"#root": new Directory("root", "#root"),
 };
+let active = heirarchy["#root"];
 
 // recursively adds children of current directory
 function rec(dir) {
@@ -23,4 +24,13 @@ function rec(dir) {
 chrome.storage.local.get(["directory"], ({ directory }) => {
 	rec(directory["#root"]);
 	heirarchy["#root"].display();
+});
+
+document.addEventListener("switchDirectory", (e) => {
+	console.log("recieved");
+	console.log(e);
+	console.log(heirarchy);
+	document.getElementById("wrapper").removeChild(active.wrapper);
+	active = heirarchy[e.detail];
+	active.display();
 });

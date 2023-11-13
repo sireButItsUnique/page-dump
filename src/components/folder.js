@@ -53,9 +53,10 @@ class Folder {
 		// opening saved page
 		this.folder.addEventListener("click", (e) => {
 			const switchDir = new CustomEvent("switchDirectory", {
-				newDir: this.state.hash,
+				detail: this.state.hash,
 			});
 			document.dispatchEvent(switchDir);
+			console.log("sent");
 		});
 	}
 
