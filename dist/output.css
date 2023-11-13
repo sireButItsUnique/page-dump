@@ -873,10 +873,10 @@ video {
   background-size: calc(100% - (var(--border-size) * 2)) calc(100% - (var(--border-size) * 2)), cover;
   background-position: center center;
   background-repeat: no-repeat;
-  animation: bg-spin 5s linear infinite;
+  animation: box-spin 5s linear infinite;
 }
 
-@keyframes bg-spin {
+@keyframes box-spin {
   to {
     --border-angle: 1turn;
   }
@@ -928,6 +928,28 @@ video {
   100% {
     opacity: 1;
     transform: translateY(0%);
+  }
+}
+
+.animate-foldup {
+  animation-duration: 0.5s;
+  animation-name: animate-foldup;
+  animation-fill-mode: forwards;
+}
+
+@keyframes animate-foldup {
+  0% {
+    opacity: 1;
+    transform: translateY(0%)
+  }
+
+  50% {
+    opacity: 0.8;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-100%);
   }
 }
 

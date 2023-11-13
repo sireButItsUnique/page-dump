@@ -23,7 +23,7 @@ class Page {
 
 	closeMenu() {
 		if (this.state.menuOpen) {
-			this.folder.removeChild(this.menu);
+			this.menu.className = this.menu.className + " animate-foldup";
 			this.state.menuOpen = false;
 		}
 	}
@@ -42,6 +42,12 @@ class Page {
 			}
 			const closeAllMenus = new Event("closeAllMenus");
 			this.wrapper.dispatchEvent(closeAllMenus);
+		});
+		this.menu.addEventListener("animationend", (e) => {
+			if (e.animationName == "animate-foldup") {
+				$(this.menu).removeClass("animate-foldup");
+				this.folder.removeChild(this.menu);
+			}
 		});
 
 		// opening saved page
